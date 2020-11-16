@@ -14,26 +14,6 @@ const helper = require('./src/lib/helper');
 const coin = require('./src/commands/coin');
 const role = require('./src/commands/roles');
 const _ = require('lodash');
-
-const UPGRADE_VARIANTS = [
-    'upgrade',
-    'benchmark',
-    'benchmarks',
-    'graduate',
-    'graduates'
-];
-
-const SUPPORT_VARIANTS = [
-    'support',
-    'donate'
-];
-
-const COMMAND_ARRAY = [
-    SUPPORT_VARIANTS,
-    UPGRADE_VARIANTS,
-]
-
-const COMMAND_LIST = _.flatten([COMMAND_ARRAY]);
  
 client.on("ready", () => {
   console.log("bot started");
@@ -70,19 +50,7 @@ client.on("message", message => {
         if (message.content.indexOf(config.prefix) !== 0) return;
 
         if (['help', 'listcommands', 'commands'].includes(command)) {
-            customCommands.listCommands(COMMAND_LIST, message, command, args);
-        }
-
-        if (UPGRADE_VARIANTS.includes(command)) {
-            embedCommands.sendUpgradeEmbed(message);
-        }
-
-        if (command === 'mana') {
-            message.channel.send('mana manages to manifest itself in shooters as an unknown entity... he is not a resource that can be used - he is the *user*');
-        }
-        
-        if (SUPPORT_VARIANTS.includes(command)) {
-            embedCommands.sendSupportSparkyEmbed(message);
+            customCommands.listCommands(message, command, args);
         }
 
         try {

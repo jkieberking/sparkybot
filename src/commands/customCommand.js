@@ -95,7 +95,7 @@ function deleteCommand(message,command, args) {
     }
 }
 
-function listCommands(preCreatedCommandArray, message, command, args) {
+function listCommands(message, command, args) {
     if (['help', 'listcommands', 'commands'].includes(command)) {
         if (message.channel.name !== 'commands') {
             helper.useCommandInCommandsChannel(message);
@@ -115,9 +115,6 @@ function listCommands(preCreatedCommandArray, message, command, args) {
                         commandNameArray.push(commandName);
                     }
                     commandNameArray.sort();
-                    for (commandName of preCreatedCommandArray) {
-                        commandNameArray.unshift(commandName);
-                    }
 
                     descriptionString = '';
                     for (commandName of commandNameArray) {

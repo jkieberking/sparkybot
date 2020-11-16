@@ -78,30 +78,6 @@ function sendWelcomeToChannel(message) {
         message.channel.send(graduate);
         message.channel.send(socials);
         message.channel.send(boosting);
-        sendSupportSparkyEmbed(message);
 }
 
-function sendUpgradeEmbed(message) {
-    let upgrade = new Discord.RichEmbed()
-            .setTitle("Want to increase your skill rank? :mortar_board: ")
-            .setColor (11342935)
-            .setDescription("Check out our benchmarks: http://bit.ly/2PdgZlm \nGraduate here: http://bit.ly/2NvOVqY");
-    
-    message.channel.send(upgrade);
-}
-
-function sendSupportSparkyEmbed(message) {
-    let supportSparky = new Discord.RichEmbed()
-    .setTitle("Supporting Sparky :money_with_wings:")
-    .setColor (10527594)
-    .setThumbnail('https://i.imgur.com/cJ0TZg1.png')
-    .setDescription(":white_small_square: [Become a Patron](https://www.patreon.com/sparkygg) and support Sparky\n\
-:white_small_square: Purchase a [Sparky mousepad](https://www.inkedgaming.com/collections/artists/sparky)\n\
-:white_small_square: Use our [InkedGaming affiliate link](https://inkedgaming.com/sparky)\n\
-:white_small_square: Epic Games creator code: `SparkyGG`\n\
-:white_small_square: Subscribe [via twitch](https://www.twitch.tv/siniaims), donate bits or [donate via paypal](https://www.paypal.me/syntensity)");
-
-    message.channel.send(supportSparky);
-}
-
-module.exports = { sendWelcomeToChannel, sendUpgradeEmbed, sendSupportSparkyEmbed };
+module.exports = { sendWelcomeToChannel };
