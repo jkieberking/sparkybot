@@ -17,7 +17,7 @@ function userIdFromString(string) {
 }
 
 function memberById(guild, id) {
-    return guild.members.get(id);
+    return guild.members.cache.get(id);
 }
 
 function checkAndWarnIfNotCommands(message) {
@@ -31,7 +31,7 @@ function useCommandInCommandsChannel(message) {
 }
 
 function getHighestAdminHelperRole(message) {
-    return message.member.roles.find(role => {
+    return message.member.roles.cache.find(role => {
         for (const adminHelper of ['owner', 'staff', 'helper']) {
             if (role.name.toLowerCase().includes(adminHelper)) {
                 return true;
@@ -46,7 +46,7 @@ function isMod(guild, discordId) {
         return false;
     }
 
-    const modRole = member.roles.find(role => {
+    const modRole = member.roles.cache.find(role => {
         for (const adminHelper of ['owner', 'staff', 'mod']) {
             if (role.name.toLowerCase().includes(adminHelper)) {
                 return true;
@@ -62,7 +62,7 @@ function isMod(guild, discordId) {
 }
 
 function roleFromName(guild, roleName) {
-    return guild.roles.find(role => {
+    return guild.roles.cache.find(role => {
         if (role.name.toLowerCase().includes(roleName)) {
             return true;
         }
@@ -70,7 +70,7 @@ function roleFromName(guild, roleName) {
 }
 
 function allRolesFromName(guild, roleName) {
-    return guild.roles.filter(role => {
+    return guild.roles.cache.filter(role => {
         if (role.name.toLowerCase().includes(roleName)) {
             return true;
         }
@@ -80,7 +80,7 @@ function allRolesFromName(guild, roleName) {
 }
 
 function channelFromName(guild, channelName) {
-    return guild.channels.find(channel => {
+    return guild.channels.cache.find(channel => {
         if (channel.name.toLowerCase().includes(channelName)) {
             return true;
         }
@@ -111,11 +111,11 @@ function removeTimeoutForMemberId(guild, memberId, remover, channel) {
 }
 
 function getEmojiByName(guild, name) {
-    return guild.emojis.find(emoji => emoji.name === name);
+    return guild.emojis.cache.find(emoji => emoji.name === name);
 }
 
 function updateMemberCount(guild, newMemberCount) {
-    let channel = guild.channels.find(channel => channel.id === config.member_count_channel_id);
+    let channel = guild.channels.cache.find(channel => channel.id === config.member_count_channel_id);
     let newChannelName = `User Count: ${newMemberCount}`;
     channel.setName(newChannelName);
 }

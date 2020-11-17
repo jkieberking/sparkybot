@@ -127,12 +127,12 @@ function listCommands(message, command, args) {
                         }
                     }
 
-                    let starting = new Discord.RichEmbed()
+                    let starting = new Discord.MessageEmbed ()
                         .setTitle("sparkybot commands")
                         .setColor("#8E5BAD")
                         .setDescription(descriptionString);
 
-                    let channel = message.guild.channels.find(channel => channel.name === 'commands');
+                    let channel = message.guild.channels.cache.find(channel => channel.name === 'commands');
                     channel.send("<@" + message.author.id + ">\n");
                     channel.send(starting);
                 });

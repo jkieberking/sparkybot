@@ -21,7 +21,7 @@ client.on("ready", () => {
 
 client.on('guildMemberAdd', member => {
     try {
-        let guild = client.guilds.find(guild => guild.id === config.guild_id);
+        let guild = client.guilds.cache.find(guild => guild.id === config.guild_id);
         let memberCount = guild.memberCount;
         let botCount = helper.roleFromName(guild, 'bots').members.array().length;
         helper.updateMemberCount(guild, memberCount - botCount);
@@ -32,7 +32,7 @@ client.on('guildMemberAdd', member => {
 
 client.on('guildMemberRemove', member => {
     try {
-        let guild = client.guilds.find(guild => guild.id === config.guild_id);
+        let guild = client.guilds.cache.find(guild => guild.id === config.guild_id);
         let memberCount = guild.memberCount;
         let botCount = helper.roleFromName(guild, 'bots').members.array().length;
         helper.updateMemberCount(guild, memberCount - botCount);
@@ -93,10 +93,10 @@ client.on('voiceStateUpdate', (oldMember, newMember) => {
     try {
         let newUserChannel = newMember.voiceChannel
         let oldUserChannel = oldMember.voiceChannel
-        const guild = client.guilds.find(guild => guild.id === config.guild_id)
+        const guild = client.guilds.cache.find(guild => guild.id === config.guild_id)
         const auditChannel = helper.channelFromName(guild, 'log-voice');
 
-        let embed = new Discord.RichEmbed()
+        let embed = new Discord.MessageEmbed()
             .setTimestamp();
 
         let statusString = '';
@@ -122,7 +122,7 @@ client.login(config.token);
 const CronJob = require('cron').CronJob;
 
 var job = new CronJob('5 * * * * *', async function() {
-  const guild = client.guilds.find(guild => guild.id === config.guild_id)
+  const guild = client.guilds.cache.find(guild => guild.id === config.guild_id)
   const eventChannel = helper.channelFromName(guild, 'log-events');
   const rowsToBeProcessed = await timeoutDb.getAllForProcessing();
   for (const row of rowsToBeProcessed) {

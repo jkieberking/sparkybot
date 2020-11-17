@@ -12,10 +12,11 @@ const usage = `
 
 async function submitScores(message, command, args) {
     return;
+    // temp code
     if (command === 'submit') {
         const userString = helper.userStringFromMessage(message);
         const submissionFailed = userString + ' submission failed, '
-        const submissions = message.guild.channels.find(channel => channel.name === 'submit');
+        const submissions = message.guild.channels.cache.find(channel => channel.name === 'submit');
         if (message.channel.name !== 'submit') {
             message.channel.send(submissionFailed + 'please submit in ' + submissions);
             return;
