@@ -18,7 +18,7 @@ function checkRoleCount(message, command, args) {
             for (const [roleId, role] of roles) {
                 if (BOT_ROLES.includes(role.name.toLowerCase())) { continue; }
                 if (numRoles++ > 1) { break; }
-                const memberCount = guild.roles.get(roleId).members.size;
+                const memberCount = guild.roles.cache.get(roleId).members.size;
                 let membersMessage = (1 === memberCount) ? 'member' : 'members';
                 messageArray.push(`**${role.name}** currently has **${memberCount}** **${membersMessage}**`);
             }

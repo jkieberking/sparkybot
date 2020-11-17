@@ -9,11 +9,11 @@
   "dependencies": {
     "app-root-path": "^2.2.1",
     "cron": "^1.8.2",
-    "discord.js": "^11.6.4",
-    "knex": "^0.20.15",
-    "lodash": "^4.17.20",
-    "nodemailer": "^6.4.16",
-    "sqlite3": "^4.2.0",
+    "discord.js": "^12.4.1",
+    "knex": "^0.20.8",
+    "lodash": "^4.17.15",
+    "nodemailer": "^6.4.2",
+    "sqlite3": "^4.1.1",
     "tofixed": "^1.0.0"
   },
   "scripts": {

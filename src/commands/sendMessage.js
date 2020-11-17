@@ -7,7 +7,7 @@ function checkSendMessageToChannel(message, command, args) {
         const messageString = messageArray.join(' ');
 
         if (args.length > 1) {
-            let channel = message.guild.channels.find(channel => channel.name === channelName);
+            let channel = message.guild.channels.cache.find(channel => channel.name === channelName);
             channel.send(messageString);
         } else {
             message.channel.send('usage: `s-message <channel-name> <message>`');
