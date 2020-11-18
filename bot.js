@@ -122,17 +122,20 @@ client.login(config.token);
 const CronJob = require('cron').CronJob;
 
 var job = new CronJob('5 * * * * *', async function() {
-  const guild = client.guilds.cache.find(guild => guild.id === config.guild_id)
-  const eventChannel = helper.channelFromName(guild, 'log-events');
-  const rowsToBeProcessed = await timeoutDb.getAllForProcessing();
-  for (const row of rowsToBeProcessed) {
-    helper.removeTimeoutForMemberId(
-        guild,
-        row['discordId'],
-        'sparkybot',
-        eventChannel
-    )
-  }
-
+    try {
+        const guild = client.guilds.cache.find(guild => guild.id === config.guild_id)
+        const eventChannel = helper.channelFromName(guild, 'log-events');
+        const rowsToBeProcessed = await timeoutDb.getAllForProcessing();
+        for (const row of rowsToBeProcessed) {
+            helper.removeTimeoutForMemberId(
+                guild,
+                row['discordId'],
+                'sparkybot',
+                eventChannel
+            )
+        }
+    } catch (error) {
+        console.log(error);
+    }
 }, null, true, 'America/Los_Angeles');
 job.start();
