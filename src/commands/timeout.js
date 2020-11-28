@@ -113,7 +113,7 @@ async function timeoutMember(message, command, args) {
         reasonNoLink,
         `messagelink: ${helper.getLinkToMessage(message)}`
     ].join('\n');
-    targetMember.addRole(timeoutRole, reasonString);
+    targetMember.roles.add(timeoutRole, reasonString);
     message.channel.send(reasonNoLink);
 }
 

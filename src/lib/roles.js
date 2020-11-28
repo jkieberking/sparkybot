@@ -4,7 +4,7 @@ const rolesToNamesMap = {
 
 function addToRole(message, member, roleName) {
     const role = message.guild.roles.cache.find(role => role.name === rolesToNamesMap[roleName]);
-    member.addRole(role);
+    member.roles.add(role);
 }
 
 module.exports = { addToRole }

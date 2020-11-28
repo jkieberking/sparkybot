@@ -31,6 +31,10 @@ function useCommandInCommandsChannel(message) {
 }
 
 function getHighestAdminHelperRole(message) {
+    if  (null === message.member) {
+        console.log(`NULL MEMBER ${JSON.stringify(message)}`);
+        return null;
+    }
     return message.member.roles.cache.find(role => {
         for (const adminHelper of ['owner', 'staff', 'helper']) {
             if (role.name.toLowerCase().includes(adminHelper)) {
