@@ -1,6 +1,6 @@
 {
   "token": "insert-bot-token-here",
-  "prefix": "s-",
+  "prefix": ["s-", "v-"],
   "admin_ids": [
       <id_1>,
       <id_2>

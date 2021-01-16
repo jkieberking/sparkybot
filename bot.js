@@ -14,31 +14,13 @@ const helper = require('./src/lib/helper');
 const coin = require('./src/commands/coin');
 const role = require('./src/commands/roles');
 const _ = require('lodash');
+const fs = require('fs');
  
 client.on("ready", () => {
-  console.log("bot started");
-});
-
-client.on('guildMemberAdd', member => {
-    try {
-        let guild = client.guilds.cache.find(guild => guild.id === config.guild_id);
-        let memberCount = guild.memberCount;
-        let botCount = helper.roleFromName(guild, 'bots').members.array().length;
-        helper.updateMemberCount(guild, memberCount - botCount);
-    } catch (e) {
-        console.log(e);
-    }
-});
-
-client.on('guildMemberRemove', member => {
-    try {
-        let guild = client.guilds.cache.find(guild => guild.id === config.guild_id);
-        let memberCount = guild.memberCount;
-        let botCount = helper.roleFromName(guild, 'bots').members.array().length;
-        helper.updateMemberCount(guild, memberCount - botCount);
-    } catch (e) {
-        console.log(e);
-    }
+    fs.readFile('storage/voltaic-logo', 'utf8', function(err, data) {
+        console.log(data);
+    });
+    console.log("bot started");
 });
  
 client.on("message", message => {
@@ -47,7 +29,18 @@ client.on("message", message => {
         const command = args.shift().toLowerCase();
 
         if (message.author.bot) return;
-        if (message.content.indexOf(config.prefix) !== 0) return;
+
+        // check if prefix set and matches
+        if (config.prefix.length === 0) throw new Error('prefix not set');
+        let foundPrefix = false;
+        for (const prefix of config.prefix) {
+            if (message.content.indexOf(prefix) === 0) {
+                foundPrefix = true;
+            }
+        }
+        if (!foundPrefix) {
+            return;
+        }
 
         if (['help', 'listcommands', 'commands'].includes(command)) {
             customCommands.listCommands(message, command, args);
@@ -84,6 +77,28 @@ client.on("message", message => {
         }
     } catch (error) {
         console.log(error);
+    }
+});
+
+client.on('guildMemberAdd', member => {
+    try {
+        let guild = client.guilds.cache.find(guild => guild.id === config.guild_id);
+        let memberCount = guild.memberCount;
+        let botCount = helper.roleFromName(guild, 'bots').members.array().length;
+        helper.updateMemberCount(guild, memberCount - botCount);
+    } catch (e) {
+        console.log(e);
+    }
+});
+
+client.on('guildMemberRemove', member => {
+    try {
+        let guild = client.guilds.cache.find(guild => guild.id === config.guild_id);
+        let memberCount = guild.memberCount;
+        let botCount = helper.roleFromName(guild, 'bots').members.array().length;
+        helper.updateMemberCount(guild, memberCount - botCount);
+    } catch (e) {
+        console.log(e);
     }
 });
 
