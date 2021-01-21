@@ -7,7 +7,7 @@ const BOT_ROLES = [
 function checkRoleCount(message, command, args) {
     if (command == 'rolecount') {
         const guild = message.guild;
-        let roles = helper.allRolesFromName(guild, args[0].join(' ').toLowerCase());
+        let roles = helper.allRolesFromName(guild, args.join(' ').toLowerCase());
         roles = roles.sort(function(a, b){
             return a.name.length - b.name.length
         });
@@ -40,7 +40,7 @@ function checkRoleList(message, command, args) {
                 message.channel.send(usage);
             }
             
-            let roles = helper.allRolesFromName(message.guild, args[0].args[0].join(' ').toLowerCase());
+            let roles = helper.allRolesFromName(message.guild, args[0].args.join(' ').toLowerCase());
             roles = roles.sort(function(a, b){
                 return a.name.length - b.name.length
             });
