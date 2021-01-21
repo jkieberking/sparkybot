@@ -40,7 +40,7 @@ function checkRoleList(message, command, args) {
                 message.channel.send(usage);
             }
             
-            let roles = helper.allRolesFromName(message.guild, args[0].args.join(' ').toLowerCase());
+            let roles = helper.allRolesFromName(message.guild, args.join(' ').toLowerCase());
             roles = roles.sort(function(a, b){
                 return a.name.length - b.name.length
             });
