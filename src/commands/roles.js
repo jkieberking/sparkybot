@@ -36,9 +36,9 @@ function checkRoleList(message, command, args) {
     if (command === 'rolelist') {
         const usage = 's-rolelist <role> <page>'
         try {
-            if (![1,2].includes(args.length)) {
-                message.channel.send(usage);
-            }
+            // if (![1,2].includes(args.length)) {
+            //    message.channel.send(usage);
+            //}
             
             let roles = helper.allRolesFromName(message.guild, args.join(' ').toLowerCase());
             roles = roles.sort(function(a, b){
@@ -49,7 +49,7 @@ function checkRoleList(message, command, args) {
                 const role = roles.first();
                 let members = role.members.map(m=> m.nickname ? m.nickname : m.user.username);
                 members.sort();
-                members = getSlicedMembersList(members, args[1]);
+                //members = getSlicedMembersList(members, args[1]);
                 if (members.length === 0) {
                     message.channel.send('no members found');
                     return;

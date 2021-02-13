@@ -80,18 +80,10 @@ client.on("message", message => {
     }
 });
 
-client.on('guildMemberAdd', member => {
-    try {
-        let guild = client.guilds.cache.find(guild => guild.id === config.guild_id);
-        let memberCount = guild.memberCount;
-        let botCount = helper.roleFromName(guild, 'bots').members.array().length;
-        helper.updateMemberCount(guild, memberCount - botCount);
-    } catch (e) {
-        console.log(e);
-    }
-});
+client.on('guildMemberAdd', manageMemberCount);
+client.on('guildMemberRemove', manageMemberCount);
 
-client.on('guildMemberRemove', member => {
+function manageMemberCount(member) {
     try {
         let guild = client.guilds.cache.find(guild => guild.id === config.guild_id);
         let memberCount = guild.memberCount;
@@ -100,7 +92,7 @@ client.on('guildMemberRemove', member => {
     } catch (e) {
         console.log(e);
     }
-});
+}
 
 client.on('voiceStateUpdate', (oldMember, newMember) => {
     // think there is an error when someone leaves a custom channel and the channel is deleted before

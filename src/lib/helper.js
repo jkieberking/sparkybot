@@ -120,7 +120,7 @@ function getEmojiByName(guild, name) {
 
 function updateMemberCount(guild, newMemberCount) {
     let channel = guild.channels.cache.find(channel => channel.id === config.member_count_channel_id);
-    let newChannelName = `User Count: ${newMemberCount}`;
+    let newChannelName = `📰 | Info - ${newMemberCount} Users`;
     channel.setName(newChannelName);
 }
 
